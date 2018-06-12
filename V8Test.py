@@ -7,6 +7,10 @@ import time
 import json
 import re
 
+
+"""
+暂时不支持任何EventListener
+"""
 class KeroSpider(object):
     def __init__(self):
         self.max_try_times = 4
@@ -66,6 +70,11 @@ class KeroSpider(object):
                     raise e
 
     def init_window(self, r_text):
+        """
+        初始化window对象
+        :param r_text:
+        :return:
+        """
         soup = BeautifulSoup(r_text, 'lxml')
         self.script = soup.select('script')[0].text
         self.window = HtmlWindow(url=self.url, dom_or_doc=soup)
@@ -82,6 +91,11 @@ class KeroSpider(object):
         self.session.cookies.set(_l[0], _l[1])
 
     def get_gt_challenge(self, url):
+        """
+        极验请求
+        :param url:
+        :return:
+        """
         r2 = self.get_request(url)
         json_r2 = json.loads(r2.text)
         gt = json_r2['gt']
