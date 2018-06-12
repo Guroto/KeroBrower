@@ -1,5 +1,5 @@
 # coding=utf-8
-
+# env: python2.7
 from V8Browser import HtmlWindow
 from bs4 import BeautifulSoup
 import requests
