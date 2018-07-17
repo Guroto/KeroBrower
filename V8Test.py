@@ -90,30 +90,9 @@ class KeroSpider(object):
         _l = l[0].split('=')
         self.session.cookies.set(_l[0], _l[1])
 
-    def get_gt_challenge(self, url):
-        """
-        极验请求
-        :param url:
-        :return:
-        """
-        r2 = self.get_request(url)
-        json_r2 = json.loads(r2.text)
-        gt = json_r2['gt']
-        challenge = json_r2['challenge']
-        return gt, challenge
-
 
 if __name__ == '__main__':
     kero = KeroSpider()
-    url_1 = "http://www.gsxt.gov.cn/index.html"
-    url_2 = 'http://www.gsxt.gov.cn/SearchItemCaptcha?v=' + kero.get_time_stamp()
-    r = kero.get_request(url_1)
-    kero.set_cookie_from_script(r.text)
-    kero.get_gt_challenge(url_2)
-    url_3 = 'http://api.geetest.com/gettype.php?gt={}&callback=geetest_{}'.format(kero.gt, kero.get_time_stamp())
-    kero.get_request(url_3)
-    url_4 = "http://api.geetest.com/ajax.php"
-    print(kero.session.cookies)
 
 
 
